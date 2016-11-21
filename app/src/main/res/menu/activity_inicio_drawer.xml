@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_inicio"
+            android:icon="@drawable/icon_inicio"
+            android:title="Inicio"
+            android:checked="true" />
+        <item
+            android:id="@+id/nav_calendario"
+            android:icon="@drawable/icon_calendario"
+            android:title="Calendario" />
+
+        <item
+            android:id="@+id/nav_configuracion"
+            android:icon="@drawable/icon_ajustes"
+            android:title="Preferencias" />
+        <item
+            android:id="@+id/nav_ayuda"
+            android:icon="@drawable/icon_ayuda"
+            android:title="Acerca de NotiUFPS" />
+
+        <item android:title="Más información">
+
+            <menu android:title="Más información">
+                <item
+                    android:id="@+id/nav_internet"
+                    android:icon="@drawable/icon_internet"
+                    android:title="Visita nuestra pagina" />
+
+            </menu>
+        </item>
+    </group>
+
+
+
+</menu>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <CheckBox
+        android:text="Académico"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:id="@+id/checkAcademico"
+        android:layout_below="@+id/textView3"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3" />
+
+    <CheckBox
+        android:text="Cultural"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkCultural"
+        android:layout_below="@+id/checkAcademico"
+        android:layout_alignLeft="@+id/checkAcademico"
+        android:layout_alignStart="@+id/checkAcademico" />
+
+    <CheckBox
+        android:text="Deportivo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkCultural"
+        android:layout_alignLeft="@+id/checkCultural"
+        android:layout_alignStart="@+id/checkCultural"
+        android:id="@+id/checkDeportivo" />
+
+    <CheckBox
+        android:text="Congresos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkCongresos"
+        android:layout_below="@+id/checkDeportivo"
+        android:layout_alignLeft="@+id/checkDeportivo"
+        android:layout_alignStart="@+id/checkDeportivo" />
+
+    <CheckBox
+        android:text="Empresarial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkCongresos"
+        android:layout_alignLeft="@+id/checkCongresos"
+        android:layout_alignStart="@+id/checkCongresos"
+        android:id="@+id/checkEmpresarial" />
+
+    <CheckBox
+        android:text="Administrativo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkEmpresarial"
+        android:layout_alignLeft="@+id/checkEmpresarial"
+        android:layout_alignStart="@+id/checkEmpresarial"
+        android:id="@+id/checkAdministrativo" />
+
+    <CheckBox
+        android:text="Ciencia - Tecnología"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkAdministrativo"
+        android:layout_alignLeft="@+id/checkAdministrativo"
+        android:layout_alignStart="@+id/checkAdministrativo"
+        android:id="@+id/checkCiencia_Tecnologia" />
+
+    <TextView
+        android:text="Utilizar GPS para recibir notificaciones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkCiencia_Tecnologia"
+        android:layout_alignLeft="@+id/checkCiencia_Tecnologia"
+        android:layout_alignStart="@+id/checkCiencia_Tecnologia"
+        android:layout_marginTop="26dp"
+        android:id="@+id/textView4"
+        android:textColor="#cf0821"
+        android:textSize="16sp" />
+
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView4"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_alignStart="@+id/textView4"
+        android:layout_marginTop="11dp"
+        android:id="@+id/checkGPS"
+        android:textOn="SI"
+        android:textOff="NO" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:srcCompat="@drawable/icon_save"
+        android:layout_marginBottom="28dp"
+        android:id="@+id/btn_guardar"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="40dp"
+        android:layout_marginEnd="35dp"
+        tools:srcCompat="@android:drawable/ic_menu_save"
+        app:fabSize="normal" />
+
+    <TextView
+        android:text="Tipos de eventos favoritos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:id="@+id/textView3"
+        android:layout_marginLeft="31dp"
+        android:layout_marginStart="31dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#cf0821"
+        android:textSize="16sp" />
+
+
+
+</RelativeLayout>
