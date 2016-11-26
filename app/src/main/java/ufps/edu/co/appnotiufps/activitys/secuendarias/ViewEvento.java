@@ -1,4 +1,4 @@
-package ufps.edu.co.appnotiufps;
+package ufps.edu.co.appnotiufps.activitys.secuendarias;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import ufps.edu.co.appnotiufps.R;
+
 /**
  * Created by omara on 20/11/2016.
  */
@@ -26,7 +28,7 @@ public class ViewEvento extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.view_evento);
         SharedPreferences config = getSharedPreferences("preferencias", Context.MODE_PRIVATE);
-        String url_server= config.getString("url_server", "")+getIntent().getExtras().getString("url_evento");
+        String url_server= config.getString("url_server", "")+config.getString("url_temp", "");
         this.cargarWeb(url_server);
     }
 

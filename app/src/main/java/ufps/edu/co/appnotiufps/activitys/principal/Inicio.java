@@ -1,7 +1,8 @@
-package ufps.edu.co.appnotiufps;
+package ufps.edu.co.appnotiufps.activitys.principal;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -14,10 +15,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
-
 import java.util.Stack;
+
+import ufps.edu.co.appnotiufps.bd.dao.NotificacionDAO;
+import ufps.edu.co.appnotiufps.fragments.acerca_de.AcercaDe;
+import ufps.edu.co.appnotiufps.fragments.calendario.Calendario;
+import ufps.edu.co.appnotiufps.fragments.configuracion.Configuracion;
+import ufps.edu.co.appnotiufps.R;
+import ufps.edu.co.appnotiufps.fragments.inicio.ViewInicio;
+import ufps.edu.co.appnotiufps.services.Servicio;
 
 public class Inicio extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -36,7 +42,7 @@ public class Inicio extends AppCompatActivity
         //Guardar url del servidor
         SharedPreferences config = getSharedPreferences("preferencias", Context.MODE_PRIVATE);
         SharedPreferences.Editor editar = config.edit();
-        editar.putString("url_server","http://sandbox1.ufps.edu.co/~ufps_17/notiufps/");
+        editar.putString("url_server",this.url_sitio);
         editar.commit();
         //
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -62,6 +68,14 @@ public class Inicio extends AppCompatActivity
         this.pilaItem=new Stack<MenuItem>();
         //se guarda el item del menu de inicio por primera vez en la pila
         this.pilaItem.push(navigationView.getMenu().getItem(0));
+
+        //Iniciamos el servicio en segundo plano
+        Servicio servicio=new Servicio();
+        startService(new Intent(this, Servicio.class));
+
+
+
+
 
     }
 

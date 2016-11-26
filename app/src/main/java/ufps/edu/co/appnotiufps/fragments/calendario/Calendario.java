@@ -1,4 +1,4 @@
-package ufps.edu.co.appnotiufps;
+package ufps.edu.co.appnotiufps.fragments.calendario;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -12,6 +12,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
+
+import ufps.edu.co.appnotiufps.R;
 
 /**
  * Created by omara on 17/11/2016.

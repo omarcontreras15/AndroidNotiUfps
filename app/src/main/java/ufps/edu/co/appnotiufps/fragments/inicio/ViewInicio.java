@@ -1,4 +1,4 @@
-package ufps.edu.co.appnotiufps;
+package ufps.edu.co.appnotiufps.fragments.inicio;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,10 +13,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+
+import ufps.edu.co.appnotiufps.bd.dto.EventoDTO;
+import ufps.edu.co.appnotiufps.bd.dao.EventoDAO;
+import ufps.edu.co.appnotiufps.R;
+import ufps.edu.co.appnotiufps.activitys.secuendarias.ViewEvento;
 
 /**
  * Created by omara on 19/11/2016.
@@ -25,7 +30,7 @@ import java.util.ArrayList;
 public class ViewInicio extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private View view;
     private  String url_server;
-    private ArrayList<Evento> eventos;
+    private ArrayList<EventoDTO> eventoDTOs;
     private SwipeRefreshLayout  mSwipeRefreshLayout;
 
 
@@ -46,32 +51,18 @@ public class ViewInicio extends Fragment implements SwipeRefreshLayout.OnRefresh
         return this.view;
     }
 
-/*
-    private void cargarEventos(){
-        PruebaBD prueba=new PruebaBD();
-        try {
-            ArrayList<Evento> eventos= prueba.listarAllEventos();
-            Evento eve=eventos.get(0);
-            ((TextView)this.view.findViewById(R.id.textEvento)).setText(eve.getTitulo());
-            Bitmap imagen=this.cargarImagen(this.url_server+eve.getUrl_img());
-            ((ImageView)this.view.findViewById(R.id.img)).setImageBitmap(imagen);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    */
 
     private void cargarEventos(){
-        PruebaBD prueba=new PruebaBD();
+        EventoDAO prueba=new EventoDAO();
         try {
-            this.eventos= prueba.listarAllEventos();
-            EventoAdapterList eventoAdapterList= new EventoAdapterList(getActivity(),this.eventos);
+            this.eventoDTOs = prueba.listarAllEventos();
+            EventoAdapterList eventoAdapterList= new EventoAdapterList(getActivity(),this.eventoDTOs);
             ListView lista=(ListView)this.view.findViewById(R.id.lista_eventos);
            lista.setAdapter(eventoAdapterList);
             lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int posicion, long id) {
-                    pasarActivity(eventos.get(posicion).getUrl(),ViewEvento.class);
+                    pasarActivity(eventoDTOs.get(posicion).getUrl(),ViewEvento.class);
                 }
             });
         } catch (Exception e) {
@@ -111,7 +102,10 @@ public class ViewInicio extends Fragment implements SwipeRefreshLayout.OnRefresh
     private void pasarActivity(String url_evento,Class clase){
         Intent activity=new Intent(getActivity(),clase);
         //mandamos a la otra activity la url del evento
-        activity.putExtra("url_evento",url_evento);
+        SharedPreferences config =getActivity().getSharedPreferences("preferencias", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editar = config.edit();
+        editar.putString("url_temp",url_evento);
+        editar.commit();
         startActivity(activity);
     }
 

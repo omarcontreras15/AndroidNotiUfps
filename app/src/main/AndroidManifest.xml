@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ufps.edu.co.appnotiufps">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- Permisos de internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <!-- Permisos de acceso al GPS -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+
+    <!-- Permiso para que el movil pueda vibrar-->
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <!-- Permiso para que el movil pueda enviar notificaciones -->
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
+
 
     <application
         android:allowBackup="true"
@@ -9,11 +24,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!-- En esta seccion van la implementacion de las activitys-->
         <activity
-            android:name=".Inicio"
+            android:name=".activitys.principal.Inicio"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+
             <!-- el intent-filter solo lo debe tener el activity principal -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,14 +39,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".ViewEvento"
+            android:name=".activitys.secuendarias.ViewEvento"
             android:label="Ver evento"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait">
-        </activity>
-
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
+        <!-- En esta seccion van la implementacion de los servicios-->
+        <service
+            android:name=".services.Servicio"
+            android:enabled="true"
+            android:exported="true">
+        </service>
     </application>
 
 </manifest>

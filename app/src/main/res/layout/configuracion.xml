@@ -4,6 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <CheckBox
         android:text="Académico"
         android:layout_width="wrap_content"
@@ -92,22 +102,31 @@
         android:textOn="SI"
         android:textOff="NO" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        app:srcCompat="@drawable/icon_save"
-        android:layout_marginBottom="28dp"
-        android:id="@+id/btn_guardar"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="40dp"
-        android:layout_marginEnd="35dp"
-        tools:srcCompat="@android:drawable/ic_menu_save"
-        app:fabSize="normal" />
+        <TextView
+            android:text="Activar notificaciones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/checkGPS"
+            android:layout_alignLeft="@+id/checkGPS"
+            android:layout_alignStart="@+id/checkGPS"
+            android:layout_marginTop="26dp"
+            android:id="@+id/textView5"
+            android:textColor="#cf0821"
+            android:textSize="16sp" />
 
-    <TextView
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView5"
+            android:layout_alignLeft="@+id/textView5"
+            android:layout_alignStart="@+id/textView5"
+            android:layout_marginTop="11dp"
+            android:id="@+id/checkNotifiacion"
+            android:textOn="SI"
+            android:textOff="NO" />
+
+        <TextView
         android:text="Tipos de eventos favoritos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -120,6 +139,21 @@
         android:textColor="#cf0821"
         android:textSize="16sp" />
 
+    </RelativeLayout>
+    </ScrollView>
 
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:srcCompat="@drawable/icon_save"
+        android:id="@+id/btn_guardar"
+        app:fabSize="normal"
+        android:layout_marginRight="37dp"
+        android:layout_marginEnd="37dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="37dp" />
 
 </RelativeLayout>

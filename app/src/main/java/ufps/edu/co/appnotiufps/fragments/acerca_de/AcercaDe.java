@@ -1,4 +1,4 @@
-package ufps.edu.co.appnotiufps;
+package ufps.edu.co.appnotiufps.fragments.acerca_de;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.Date;
+
+import ufps.edu.co.appnotiufps.R;
 
 /**
  * Created by omara on 18/11/2016.

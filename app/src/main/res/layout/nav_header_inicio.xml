@@ -32,6 +32,6 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recibe notificaciones de los nuevos eventos de la UFPS" />
+        android:text="Recibe notificaciones de los nuevos eventoDTOs de la UFPS" />
 
 </LinearLayout>
