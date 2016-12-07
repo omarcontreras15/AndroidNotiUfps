@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.location.Location;
@@ -24,28 +25,32 @@ import java.util.ArrayList;
 import ufps.edu.co.appnotiufps.R;
 import ufps.edu.co.appnotiufps.activitys.secuendarias.ViewEvento;
 import ufps.edu.co.appnotiufps.bd.dao.EventoDAO;
+import ufps.edu.co.appnotiufps.bd.dao.NotificacionDAO;
 import ufps.edu.co.appnotiufps.bd.dto.EventoDTO;
 
 import static java.lang.Thread.sleep;
 
 public class Servicio extends Service implements Runnable, LocationListener {
 
-    private int distanciaRango = 300;
-    private double longitud = -72.487597;
-    private double latitud = 7.898177;
+   //private int distanciaRango = 300;
+    //private double longitud = -72.487597;
+    //private double latitud = 7.898177;
+    private int distanciaRango = 20;
+    private double longitud = -72.505460;
+    private double latitud = 7.917908;
     private Location location;
+    //definimos el objeto de la clase SQLiteOpenHelper
+    private  NotificacionDAO db;
     //definimos el tiempo que tarda en hacer la sincronizacion de los eventos
-    private static long tiempo= 30000;
+    private static long tiempo= 15000;
 
 
-
-    public Servicio() {
+    public Servicio(){
         super();
         //creamos el objeto location que hace referencia a la localizacion de la ufps
         this.location = new Location(LocationManager.GPS_PROVIDER);
         this.location.setLatitude(this.latitud);
         this.location.setLongitude(this.longitud);
-
     }
 
 
@@ -82,6 +87,7 @@ public class Servicio extends Service implements Runnable, LocationListener {
     public void run() {
         while (true) {
             try {
+                db=new NotificacionDAO(this);
                 sleep(tiempo);
                 buscarEventos();
             } catch (InterruptedException e) {
@@ -150,7 +156,11 @@ public class Servicio extends Service implements Runnable, LocationListener {
         try {
             ArrayList<EventoDTO> eventos = new EventoDAO().listarEventosNotificaciones(this);
             for (EventoDTO x : eventos) {
-                this.crearNotificacion(x);
+                //verfica si la notificacion ya fue enviado al movil, en caso de que no
+                //inserta la notificacion a la bd sqlite y envia la notificacion
+               if(this.db.insetarNotificacion(x.getId())){
+                    this.crearNotificacion(x);
+                }
             }
 
         } catch (Exception e) {
@@ -207,25 +217,29 @@ public class Servicio extends Service implements Runnable, LocationListener {
             }
 
             if(gpsActivo){
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                        0, 0, this, Looper.getMainLooper());
+                //se manda la peticcion al sistema  para que el movil busque la ubicacion por GPS
+                locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, this, Looper.getMainLooper());
+                //dormimos al proceso por 15 segundos con el fin de que cargue la ubicacion GPS actual
+                sleep(15000);
                 //obtine la ubicacion de locationManager y lo guarda en un objeto de tipo Location
-                ubicacion=locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
+                    ubicacion=locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
              //verifica si el servicio de ubicacion por red esta disponible
             }else if(redActiva){
-                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-                        0, 0, this, Looper.getMainLooper());
+                //se manda la peticcion al sistema  para que el movil busque la ubicacion por GPS
+                locationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, this, Looper.getMainLooper());
                 //obtine la ubicacion de locationManager y lo guarda en un objeto de tipo Location
+                //dormimos al proceso por 15 segundos con el fin de que cargue la ubicacion GPS actual
+                sleep(15000);
                 ubicacion=locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             }
-            //desactiva el seguimiento de la aplicacion
-            locationManager.removeUpdates(this);
+
         }catch (Exception e){
             e.printStackTrace();
         }
         return ubicacion;
     }
+
+
 
     @Override
     public void onLocationChanged(Location location) {

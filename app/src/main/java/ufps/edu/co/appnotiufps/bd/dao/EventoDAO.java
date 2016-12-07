@@ -13,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 
 import ufps.edu.co.appnotiufps.R;
 import ufps.edu.co.appnotiufps.bd.dto.EventoDTO;
@@ -119,12 +120,18 @@ public class EventoDAO {
                 //ejecuta la consulta sql y devuelve las filas de la base de datos
                 ResultSet row = prepStmt.executeQuery();
                 while (row.next()) {
-                    EventoDTO eventoDTO =new EventoDTO(row.getInt("id"),row.getString("title"),row.getString("body"),
-                            row.getString("url"), row.getString("class"), row.getString("inicio_normal"),
-                            row.getString("final_normal"),row.getString("url_imagen"));
 
-                    array.add(eventoDTO);
+                    //Verfica que la fecha actual sea menor que la fecha de finalizacion del evento
+                    if(new Date().getTime()<row.getLong("end")){
+                        EventoDTO eventoDTO =new EventoDTO(row.getInt("id"),row.getString("title"),row.getString("body"),
+                                row.getString("url"), row.getString("class"), row.getString("inicio_normal"),
+                                row.getString("final_normal"),row.getString("url_imagen"));
+
+                        array.add(eventoDTO);
+
+                    }
                 }
+                //cierra el iterador de filas
                 row.close();
 
             } catch (Exception e) {

@@ -16,6 +16,8 @@
     <uses-permission android:name="android.permission.VIBRATE"/>
     <!-- Permiso para que el movil pueda enviar notificaciones -->
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
+    <!-- Permiso para iniciar el servicio de notificaciones al volver iniciar el sistema-->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
 
     <application
@@ -50,6 +52,11 @@
             android:enabled="true"
             android:exported="true">
         </service>
+        <receiver android:name=".services.AutoArranque" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

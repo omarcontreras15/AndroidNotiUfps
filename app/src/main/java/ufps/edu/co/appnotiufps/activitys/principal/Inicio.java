@@ -74,9 +74,6 @@ public class Inicio extends AppCompatActivity
         startService(new Intent(this, Servicio.class));
 
 
-
-
-
     }
 
 

@@ -29,7 +29,7 @@ public class AcercaDe extends Fragment {
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.acerca_de, container, false);
         Date date=new Date();
-        ((TextView)view.findViewById(R.id.fecha_acerca_de)).setText(date.getDate()+"/"+(date.getMonth()+1)+"/"+(date.getYear()+1900));
+        ((TextView)view.findViewById(R.id.fecha_acerca_de)).setText(""+(date.getYear()+1900));
 
         //activar evento del boton
         ((FloatingActionButton)view.findViewById(R.id.btn_enviar_email)).setOnClickListener(
